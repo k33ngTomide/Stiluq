@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Extractor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body class="body">
+
+    <h1>Upload a File</h1>
+    <form id="form" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file-input" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <div class="center">
+        <div class="loader" id="loader"></div>
+        <div id="loader-text"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>
