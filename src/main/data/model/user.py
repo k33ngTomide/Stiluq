@@ -7,6 +7,13 @@ class User(UserMixin):
     def __init__(self):
         self.password = None
         self.email = None
+        self.is_logged_in = False
+
+    def set_login(self, status):
+        self.is_logged_in = status
+
+    def get_login(self):
+        return self.is_logged_in
 
     def set_password(self, password):
         self.password = password

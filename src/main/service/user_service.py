@@ -5,7 +5,10 @@ from injector import inject
 from validate_email_address import validate_email
 
 from data.model.user import User
+from dtos.response.login_user_response import LoginUserResponse
+from dtos.response.logout_user_response import LogoutUserResponse
 from exception.UserAlreadyExistsException import UserAlreadyExistsException
+from exception.UserNotFoundException import UserNotFoundException
 from src.main.dtos.response.add_user_response import AddUserResponse
 
 
@@ -66,4 +69,36 @@ class UserService:
         found_user = self.user_repository.find_by_email(email)
         if found_user:
             raise UserAlreadyExistsException("User Already Exists")
+
+    def find_user(self, id):
+        found_user = self.user_repository.find_user(id)
+        if found_user:
+            return found_user
+        else:
+            raise UserNotFoundException("User Not Found")
+
+    def login(self, login_request) -> LoginUserResponse:
+        user = self.find_user(login_request.id)
+        user['is_logged_in'] = True
+
+        self.user_repository.save(user)
+
+        login_response = LoginUserResponse()
+        login_response.user_id = user.get('_id')
+        login_response.status = user['is_logged_in']
+        login_response.message = "Successfully logged in user"
+        return login_response
+
+    def logout(self, logout_request):
+        user = self.find_user(logout_request.user_id)
+        user['is_logged_in'] = True
+
+        self.user_repository.save(user)
+
+        logout_response = LogoutUserResponse()
+        logout_response.id = user.get('_id')
+        logout_response.status = user['is_logged_in']
+        logout_response._message = "Successfully logged out user"
+        return logout_response
+
 

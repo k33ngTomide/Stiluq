@@ -18,12 +18,22 @@ class UserRepository:
     def find_user(self, user_id):
         return self.mongo.db.users.find_one({'_id': user_id})
 
-    def save(self, user: User):
-        user_data = {
-            'email': user.email,
-            'password': user.password,
-        }
-        return self.mongo.db.users.insert_one(user_data)
+    def save(self, user):
+
+        if isinstance(user, dict):
+            user_id = user.get('_id')
+            update_data = {'$set': {'is_logged_in': user.get('is_logged_in')}}
+            self.mongo.db.users.update_one({'_id': user_id}, update_data)
+        elif isinstance(user, User):
+            user_data = {
+                'email': user.email,
+                'password': user.password,
+                'is_logged_in': user.is_logged_in,
+            }
+            return self.mongo.db.users.insert_one(user_data)
+
+        else:
+            raise ValueError("Unsupported user type")
 
     def find_by_email(self, email):
         return self.mongo.db.users.find_one({'email': email})
