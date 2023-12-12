@@ -1,42 +1,19 @@
-from flask import Flask
-from flask_pymongo import PyMongo
-from injector import inject
+from abc import ABC
 
 from data.model.user import User
 
-app = Flask(__name__)
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/StiluqDB'
-mongo = PyMongo(app)
 
-
-class UserRepository:
-
-    @inject
-    def __init__(self):
-        self.mongo = mongo
-
-    def find_user(self, user_id):
-        return self.mongo.db.users.find_one({'_id': user_id})
+class UserRepository(ABC):
 
     def save(self, user):
+        pass
 
-        if isinstance(user, dict):
-            user_id = user.get('_id')
-            update_data = {'$set': {'is_logged_in': user.get('is_logged_in')}}
-            self.mongo.db.users.update_one({'_id': user_id}, update_data)
-        elif isinstance(user, User):
-            user_data = {
-                'email': user.email,
-                'password': user.password,
-                'is_logged_in': user.is_logged_in,
-            }
-            return self.mongo.db.users.insert_one(user_data)
+    def find_user(self, user_id):
+        pass
 
-        else:
-            raise ValueError("Unsupported user type")
-
-    def find_by_email(self, email):
-        return self.mongo.db.users.find_one({'email': email})
+    def find_by_email(self, email_address):
+        pass
 
     def delete_all(self):
-        self.mongo.db.users.delete_many({})
+        pass
+

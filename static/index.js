@@ -1,33 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Your JavaScript code here
-
 
     let form = document.getElementById("form");
     form.addEventListener('submit', () => {
         event.preventDefault();
 
-        let file = document.getElementById("file-input");
-        const filed = file.files[0];
+        let filed = document.getElementById("file-input");
+        const file = filed.files[0];
+        console.log(file)
 
         showLoader();
 
-       setTimeout(() => {
         const formData = new FormData();
-        formData.append('file', filed);  // Assuming filed is a valid file object
+        formData.append("file", file);
 
-        fetch("http://127.0.0.1:5000/start", {
-
+        fetch("http://127.0.0.1:5000/verify", {
             method: 'POST',
             body: formData,
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // }
 
         })
             .then(response => response.blob())
             .then(blob => {
                 hideLoader();
-                document.querySelector('#loader-text').innerHTML = "Your Verified email File is ready for download";
+
+                document.querySelector('#loader-text').innerHTML =
+                    "Your Verified email File will start downloading Automatically";
 
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
@@ -37,25 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.click();
                 document.body.removeChild(link);
 
-            }).catch(error => {
+            })
+            .catch(error => {
                 console.error(error);
             });
 
-    }, 3000);
-
     })
 
-    // let downloadButton = document.querySelector("#download");
-    // downloadButton.addEventListener('submit', () => {
-    //     event.preventDefault();
-    //     console.log("Downlaod Button was Click")
-    //     document.querySelector('#loader-text').innerHTML = "";
-    //
-    //     showLoader();
-    //     result.
-    //
-    //
-    // });
+    function handleResponse(data) {
+        document.getElementById('output').innerHTML = data.processed_file;
+}
 
     function showLoader() {
         document.querySelector('#loader').style.display = 'flex';

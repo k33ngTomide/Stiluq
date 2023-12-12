@@ -9,10 +9,11 @@ from dtos.response.login_user_response import LoginUserResponse
 from dtos.response.logout_user_response import LogoutUserResponse
 from exception.UserAlreadyExistsException import UserAlreadyExistsException
 from exception.UserNotFoundException import UserNotFoundException
+from src.main.service.user_interface import UserInterface
 from src.main.dtos.response.add_user_response import AddUserResponse
 
 
-class UserService:
+class UserService(UserInterface):
 
     @inject
     def __init__(self, user_repository):
@@ -21,33 +22,28 @@ class UserService:
     def get_user(self, user_id):
         return self.user_repository.find_user(user_id)
 
-    @staticmethod
-    def verify_data_in_file(file):
+    def verify_data_in_file(self, file):
+        print("verifying_data_in_file")
 
         if file.filename == '':
             return "No selected file"
 
         if file and file.filename.endswith('.txt'):
+            processed_file_path = "src/processed_file.txt"
 
-            file_content = file.read().decode('utf-8')
-            processed_file = io.BytesIO()
+            try:
+                with open(processed_file_path, 'w', encoding='utf-8') as file_output:
+                    for line in file:
+                        email = line.strip().decode('utf-8')
+                        print(email)
+                        if self.verify_email(email):
+                            file_output.write(email + "\n")
+            except FileNotFoundError:
+                return "File not found", 404
 
-            for line in file_content.split("\n"):
-                email = line.strip()
-                print(email)
-
-                if validate_email(email):
-                    print(email)
-                    processed_file.write(f"{email}\n".encode('utf-8'))
-
-            current_file = processed_file
-
-            return send_file(
-                processed_file,
-                as_attachment=True,
-                download_name='processed_file.txt',
-                mimetype='text/plain'
-            )
+            # file_content = file.read().decode('utf-8')
+            # processed_file = io.BytesIO()
+            # processed_file.write(f"{email}\n".encode('utf-8'))
 
     def register(self, add_users_request):
 
@@ -70,8 +66,8 @@ class UserService:
         if found_user:
             raise UserAlreadyExistsException("User Already Exists")
 
-    def find_user(self, id):
-        found_user = self.user_repository.find_user(id)
+    def find_user(self, user_id):
+        found_user = self.user_repository.find_user(user_id)
         if found_user:
             return found_user
         else:
@@ -101,4 +97,9 @@ class UserService:
         logout_response._message = "Successfully logged out user"
         return logout_response
 
+    def verify_email(self, email):
 
+        if validate_email(email) is True:
+            return True
+        else:
+            return False

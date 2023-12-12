@@ -7,16 +7,86 @@
 </head>
 <body class="body">
 
-    <h1>Upload a File</h1>
-    <form id="form" action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file-input" required>
-        <button type="submit">Upload</button>
-    </form>
+    <div class="main">
+        <div class="nav-section">
+            <div class="logo">
+                <img src="../static/assets/logo.png">
+                <h1>STILUQ</h1>
+            </div>
 
-    <div class="center">
-        <div class="loader" id="loader"></div>
-        <div id="loader-text"></div>
+            <nav class="nav">
+                <a href="" >Home</a>
+                <a href="">About us</a>
+                <a href="">Services</a>
+                <a href="">Contact Us</a>
+            </nav>
+
+            <div class="nav-buttons">
+                <button>Login</button>
+                <button>Sign up</button>
+            </div>
+        </div>
+
+
+
+       <div class="landing-screen">
+           <div class="hero-section">
+               <div class="hero-left">
+                   <h1>We can verify your Bulk Email. <span>Fast, Soft and Easily</span></h1>
+                   <p>
+                       Verify email addresses with ease and
+                       confidence using our powerful Email Verification App.
+                       Ensure your email lists are accurate, valid, and up-to-date
+                       to enhance your communication efforts and reach
+                       your audience effectively.
+                   </p>
+                   <button>Get Started</button>
+               </div>
+
+               <div class="hero-right">
+                   <img src="../static/assets/hero-section-image.png" alt="demo image">
+               </div>
+           </div>
+
+
+           <div class="about-us">
+
+           </div>
+
+           <div class="our-services">
+
+               <div>
+
+               </div>
+               <div>
+
+               </div>
+               <div>
+                   
+               </div>
+           </div>
+
+       </div>
+
+
+        <div class="collector">
+             <h1>Upload a File</h1>
+
+            <form id="form" action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file-input" required>
+                <button type="submit">Upload</button>
+            </form>
+
+            <div class="center">
+                <div class="loader" id="loader"></div>
+                <div id="loader-text"></div>
+            </div>
+        </div>
+
     </div>
+
+
+
 
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
