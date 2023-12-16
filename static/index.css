@@ -20,11 +20,12 @@
 .landing-screen{
     display: flex;
     flex-direction: column;
-
+    gap: 30px;
     align-self: center;
     width: 100%;
     max-width: 1700px;
     min-width: 1200px;
+    margin-top: 90px;
 }
 
 .nav-section{
@@ -34,6 +35,10 @@
     max-width: 1900px;
     min-width: 1200px;
     width: 100%;
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+    background-color: #fdfdfd;
 }
 
 .logo{
@@ -195,7 +200,7 @@
 .d-about>img{
     width: 70px;
 }
-.about-details{
+.about-details, .contact-details{
     align-self: stretch;
     display: flex;
     justify-content: space-around;
@@ -240,8 +245,24 @@
 }
 
 
+.d-contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.inner-contact{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    align-self: stretch;
+}
 
+.inner-contact > img{
+    width: 60px;
+    height: 60px;
+}
 
 
 

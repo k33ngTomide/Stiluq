@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Email Extractor</title>
+    <title>Stiluq</title>
+    <link rel="icon" href="../static/assets/logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body class="body">
@@ -15,7 +16,7 @@
             </div>
 
             <nav class="nav">
-                <a href="" >Home</a>
+                <a href="#landing-screen" >Home</a>
                 <a href="#about_us">About us</a>
                 <a href="#our_services">Services</a>
                 <a href="#contact_us">Contact Us</a>
@@ -29,7 +30,7 @@
 
 
 
-       <div class="landing-screen">
+       <div class="landing-screen" id="landing-screen">
            <div class="hero-section">
                <div class="hero-left">
                    <h1>We can verify your Bulk Email. <span>Fast, Soft and Easily</span></h1>
@@ -138,6 +139,19 @@
 
            </div>
 
+           <div class="contact-details" id="contact_us">
+               <div class="d-contact">
+                   <h4>Our customer service is available 24/7</h4>
+                   <div class="inner-contact">
+                       <img src="../static/assets/icons8-whatsapp-100.png" alt="icon">
+                       <img src="../static/assets/icons8-phone-100.png" alt="icon">
+                       <h1>+234-810-356-3270</h1>
+                   </div>
+
+
+                   <h1>Contact Now us</h1>
+               </div>
+           </div>
 
 
        </div>
@@ -157,10 +171,9 @@
             </div>
         </div>
 
+        
+
     </div>
-
-
-
 
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
