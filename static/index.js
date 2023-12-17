@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    let form = document.getElementById("form");
+    let form = document.getElementById("file-form");
     form.addEventListener('submit', () => {
         event.preventDefault();
 
@@ -43,10 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     })
 
-    function handleResponse(data) {
-        document.getElementById('output').innerHTML = data.processed_file;
-}
-
     function showLoader() {
         document.querySelector('#loader').style.display = 'flex';
     }
@@ -54,5 +50,43 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideLoader() {
         document.querySelector('#loader').style.display = 'none';
     }
+
+
+    let loginButton = document.querySelector('#login-button');
+    loginButton.addEventListener('click', () => {
+        event.preventDefault();
+        document.getElementById('signup-segment').style.display = 'none';
+        document.getElementById('login-segment').style.display = 'block';
+    });
+
+    let cancelLoginButton = document.querySelector('#cancel-login');
+    cancelLoginButton.addEventListener("click", () => {
+        document.getElementById('login-segment').style.display = 'none';
+    });
+
+    let cancelSignupButton = document.querySelector('#cancel-signup');
+    cancelSignupButton.addEventListener("click", () => {
+        document.getElementById('signup-segment').style.display = 'none';
+    });
+
+    let mainSignupButton = document.querySelector('#straight-signup');
+    mainSignupButton.addEventListener("click", () => {
+        document.getElementById('signup-segment').style.display = 'block';
+    });
+
+    let getStartedButton = document.querySelector('#get-started');
+    getStartedButton.addEventListener("click", () => {
+        document.getElementById('signup-segment').style.display = 'block';
+    });
+
+    let mainLoginButton = document.querySelector('#straight-login');
+    mainLoginButton.addEventListener("click", () => {
+        document.getElementById('login-segment').style.display = 'block';
+    });
+
+
+
+
+
 
 });

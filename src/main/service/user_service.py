@@ -74,7 +74,7 @@ class UserService(UserInterface):
             raise UserNotFoundException("User Not Found")
 
     def login(self, login_request) -> LoginUserResponse:
-        user = self.find_user(login_request.id)
+        user = self.find_user(login_request['id'])
         user['is_logged_in'] = True
 
         self.user_repository.save(user)

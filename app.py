@@ -11,14 +11,34 @@ app = Flask(__name__)
 user_repository = UserRepositoryImpl()
 instance = UserService(user_repository)
 
+
 @app.route('/stiluq')
 def index():
     return render_template("index.html")
 
 
+@app.route('/login', methods=['POST'])
+def login_user():
+    try:
+        request_data = request.get_json()
+        login_response = instance.login(request_data)
+        return login_response
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+
+@app.route('/signup', methods=['POST'])
+def register_user():
+    try:
+        request_data = request.get_json()
+        register_response = instance.register(request_data)
+        return register_response
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+
 @app.route('/verify', methods=['POST'])
 def process_file():
-
     try:
 
         uploaded_file = request.files['file']
@@ -26,11 +46,11 @@ def process_file():
 
         processed_file_path = "src/processed_file.txt"
         return send_file(
-                processed_file_path,
-                as_attachment=True,
-                download_name='processed_file.txt',
-                mimetype='text/plain'
-            )
+            processed_file_path,
+            as_attachment=True,
+            download_name='processed_file.txt',
+            mimetype='text/plain'
+        )
 
         # processed_file = io.BytesIO()
         # for line in uploaded_file:
@@ -44,8 +64,6 @@ def process_file():
 
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
-
-
 
 
 if __name__ == '__main__':
