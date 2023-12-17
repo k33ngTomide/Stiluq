@@ -5,6 +5,7 @@
     <title>Stiluq</title>
     <link rel="icon" href="../static/assets/logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
 </head>
 <body class="body">
 
@@ -149,10 +150,61 @@
                    </div>
 
 
-                   <h1>Contact Now us</h1>
+                   <h1>Contact Us Now</h1>
                </div>
            </div>
+           <div class="display-border">
+               <img src="../static/assets/border.png" alt="image">
+           </div>
 
+           <div class="footer">
+
+               <div class="footer-first">
+                   <div class="footer-first-left">
+                       <h1>Stiluq</h1>
+                       <p>You do not have to go a long way to verify your
+                           bulk emails anymore, Stiluq is there for you</p>
+
+                       <div class="social-media">
+                           <img src="../static/assets/icons8-facebook-48.png" alt="icon">
+                           <img src="../static/assets/icons8-twitterx-50.png" alt="icon">
+                           <img src="../static/assets/icons8-instagram-logo-48.png" alt="icon">
+                       </div>
+                   </div>
+
+                   <div>
+                       <h4>Quick Links</h4>
+
+                       <div class="quick-links-div">
+                           <a href="#landing-screen">Home</a>
+                           <a href="#our_services">Services</a>
+                           <a href="#about_us">About us</a>
+                           <a href="#contact_us">Contact Us</a>
+                       </div>
+
+                   </div>
+
+                   <div>
+                       <h4>Services</h4>
+                       <p>Email verification</p>
+                       <p>Contact Backup</p>
+                       <p>File Backup</p>
+                   </div>
+
+                   <div>
+                       <h4>Contact Us</h4>
+                       <p class="contact-info"><img src="../static/assets/icons8-location-50.png">Lagos State, Nigeria</p>
+                       <p class="contact-info"><img src="../static/assets/icons8-call-50.png">+234-810-356-3270</p>
+                       <p class="contact-info"><img src="../static/assets/icons8-email-50.png">stiluqInfo@gmail.com</p>
+                   </div>
+               </div>
+
+               <div class="footer-second">
+                   <p>© 2023 STILUQ. All rights reserved. Privacy Policy | Terms of Service.
+                       Verified & Secured Email Delivery by Stiluq</p>
+               </div>
+
+           </div>
 
        </div>
 
@@ -171,7 +223,27 @@
             </div>
         </div>
 
-        
+
+
+        <div class=signup-segment">
+
+            <h1 class="text"> Welcome to your Expense Tracker <br><br>Sign Up</h1>
+            <h3 id="signup-response"></h3>
+            <form class="details" id="signup" method="post">
+                <input type="text" placeholder="Enter your name" id="firstname" required>
+                <input type="email" placeholder="Enter your preferred email " id="email" required>
+                <input type="password" placeholder="Enter your password " id="password" required>
+                <input type="number" placeholder="Enter your phone number" id="phone-number">
+
+                <button class="button" id="form" type="submit">Sign-Up</button>
+
+            </form>
+
+            <div class="account"> Already have an account?
+              <button class="login-button" id="login-button">Login Here</button>
+            </div>
+
+        </div>
 
     </div>
 

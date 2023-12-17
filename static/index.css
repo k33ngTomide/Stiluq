@@ -200,7 +200,7 @@
 .d-about>img{
     width: 70px;
 }
-.about-details, .contact-details{
+.about-details, .contact-details, .footer{
     align-self: stretch;
     display: flex;
     justify-content: space-around;
@@ -264,7 +264,66 @@
     height: 60px;
 }
 
+.footer{
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+}
 
+.footer-first{
+    display: flex;
+    align-self: stretch;
+    justify-content: space-around;
+    padding: 0px 30px;
+}
+
+.quick-links-div{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quick-links-div > a {
+    text-decoration: none;
+    color: black;
+}
+
+.footer-first-left{
+    gap: 60px;
+}
+
+.footer-first-left > p{
+    max-width: 400px;
+
+}
+
+.contact-info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-info > img{
+    width: 25px;
+}
+
+.display-border{
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-border > img{
+    width: 80%;
+    height: 20%;
+}
+
+.social-media{
+    display: flex;
+    gap: 30px;
+    margin-top: 60px;
+}
 
 /*-------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------*/
