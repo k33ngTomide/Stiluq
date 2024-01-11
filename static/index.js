@@ -86,6 +86,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+    const signup = document.getElementById('signup');
+    signup.addEventListener('submit', () => {
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const number = document.getElementById('phone-number').value;
+        const password = document.getElementById('password').value;
+
+        fetch('http://localhost:5000/signup', {
+            method: 'POST',
+            body: JSON.stringify({name, email, number, password}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(resObj => {
+                console.log(resObj)
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
+    })
 
 
 

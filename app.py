@@ -27,7 +27,7 @@ def login_user():
         return jsonify({'status': 'error', 'message': str(e)})
 
 
-@app.route('/signup', methods=['POST'])
+@app.route('/signup')
 def register_user():
     try:
         request_data = request.get_json()
