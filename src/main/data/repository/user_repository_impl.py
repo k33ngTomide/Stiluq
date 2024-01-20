@@ -11,7 +11,6 @@ mongo = PyMongo(app)
 
 
 class UserRepositoryImpl(UserRepository):
-
     @inject
     def __init__(self):
         self.mongo = mongo

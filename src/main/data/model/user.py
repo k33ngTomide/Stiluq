@@ -7,7 +7,9 @@ class User(UserMixin):
     def __init__(self):
         self.password = None
         self.email = None
+        self.username = None
         self.is_logged_in = False
+        self.number = None
 
     def set_login(self, status):
         self.is_logged_in = status
