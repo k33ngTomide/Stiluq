@@ -45,12 +45,12 @@ class UserService(UserInterface):
         user.set_email(add_users_request.get('email'))
         user.number = add_users_request.get('number')
         user.set_password(add_users_request.get('password'))
-        print(user)
 
         saved_user = self.user_repository.save(user)
+        new_id = str(saved_user.inserted_id)
 
         return {
-            'user_id': saved_user.inserted_id,
+            'user_id': new_id,
             'message': "Successfully registered user",
             'status': 'ok'
         }
