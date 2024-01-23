@@ -1,6 +1,4 @@
-import io
-
-from flask import send_file
+import bcrypt
 from injector import inject
 from validate_email_address import validate_email
 
@@ -44,7 +42,10 @@ class UserService(UserInterface):
         user.username = add_users_request.get('username')
         user.set_email(add_users_request.get('email'))
         user.number = add_users_request.get('number')
-        user.set_password(add_users_request.get('password'))
+
+        raw_password = add_users_request.get('password')
+        hashed_password = bcrypt.hashpw(raw_password.encode('utf-8'), bcrypt.gensalt())
+        user.set_password(hashed_password.decode('utf-8'))
 
         saved_user = self.user_repository.save(user)
         new_id = str(saved_user.inserted_id)
@@ -60,23 +61,29 @@ class UserService(UserInterface):
         if found_user:
             raise UserAlreadyExistsException("User Already Exists")
 
-    def find_user(self, user_id):
-        found_user = self.user_repository.find_user(user_id)
+    def find_user(self, user_email):
+        found_user = self.user_repository.find_by_email(user_email)
         if found_user:
             return found_user
         else:
             raise UserNotFoundException("User Not Found")
 
     def login(self, login_request):
-        user = self.find_user(login_request['id'])
-        user['is_logged_in'] = True
-
-        updated_user = self.user_repository.save(user)
-        return {
-            'user_id': updated_user.get('_id'),
-            'message': "Successfully logged in user",
-            'status': 'ok'
-        }
+        user = self.find_user(login_request.get('email'))
+        hashed_login_password = bcrypt.hashpw(login_request.get('password').encode('utf-8'), bcrypt.gensalt())
+        if bcrypt.checkpw(hashed_login_password, user.get_password()):
+            user['is_logged_in'] = True
+            updated_user = self.user_repository.save(user)
+            return {
+                'user': str(updated_user),
+                'message': "Successfully logged in user",
+                'status': 'ok'
+            }
+        else:
+            return {
+                'message': "Invalid Credentials, username or password incorrect",
+                'status': 'failed'
+            }
 
     def logout(self, logout_request):
         user = self.find_user(logout_request.user_id)

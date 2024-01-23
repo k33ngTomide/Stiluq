@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(res => res.json())
             .then(resObj => {
                 console.log(resObj)
-
+                document.getElementById('signup-response').innerHTML = resObj.message;
             })
             .catch(error => {
                 console.log(error);
@@ -114,6 +114,30 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
 
+
+    const login = document.getElementById('signup-button');
+    login.addEventListener('click', () => {
+
+        const email = document.getElementById('signin-email').value;
+        const password = document.getElementById('signin-password').value;
+
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            body: JSON.stringify({email, password}), 
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(resObj => {
+                console.log(resObj)
+                document.getElementById('login-response').innerHTML = resObj.message;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    })
 
 
 
